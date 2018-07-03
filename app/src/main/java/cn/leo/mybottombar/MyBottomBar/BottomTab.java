@@ -1,15 +1,16 @@
 package cn.leo.mybottombar.MyBottomBar;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.DrawableRes;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import cn.leo.mybottombar.R;
@@ -18,7 +19,7 @@ import cn.leo.mybottombar.R;
  * Created by Leo on 2018/1/29.
  */
 
-public class BottomTab extends RelativeLayout {
+public class BottomTab extends ConstraintLayout {
 
     private TextView mSubTitle;
     private ImageView mIcon;
@@ -28,6 +29,8 @@ public class BottomTab extends RelativeLayout {
     private int mUnSelectedRes;
     private int mSelectedRes;
     private int mHeightDp;
+    private int mTextSelectedColor;
+    private int mTextUnSelectedColor;
 
     public BottomTab(Context context) {
         this(context, null);
@@ -39,7 +42,26 @@ public class BottomTab extends RelativeLayout {
 
     public BottomTab(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BottomTab);
+        mTitle = a.getString(R.styleable.BottomTab_bottomTab_title_text);
+        mSelectedRes = a.getResourceId(R.styleable.BottomTab_bottomTab_icon_selected, 0);
+        mUnSelectedRes = a.getResourceId(R.styleable.BottomTab_bottomTab_icon_unselected, 0);
+        mTextSelectedColor = a.getColor(R.styleable.BottomTab_bottomTab_title_selectedColor, getResources().getColor(R.color.colorPrimary));
+        mTextUnSelectedColor = a.getColor(R.styleable.BottomTab_bottomTab_title_unselectedColor, Color.GRAY);
+        int bubbleStyle = a.getInt(R.styleable.BottomTab_bottomTab_icon_bubbleStyle, 0);
+        int bubbleNum = a.getInt(R.styleable.BottomTab_bottomTab_icon_bubbleNum, 0);
+        boolean isHideTitle = a.getBoolean(R.styleable.BottomTab_bottomTab_title_hide, false);
+        a.recycle();
         init();
+        if (bubbleStyle > 0) {
+            setBubbleDot();
+        } else {
+            mBubbleNum.setJustBubble(false);
+        }
+        setBubbleNum(bubbleNum);
+        if (isHideTitle) {
+            hideTitle();
+        }
     }
 
     public BottomTab(Context context,
@@ -57,48 +79,51 @@ public class BottomTab extends RelativeLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        if (mHeightDp == 0) {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            return;
+        }
         int height = MeasureSpec.makeMeasureSpec((int) (mHeightDp * mOneDip), MeasureSpec.EXACTLY);
         super.onMeasure(widthMeasureSpec, height);
     }
 
     private void init() {
-        setClipChildren(false);
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         mOneDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, displayMetrics);
+        //文本标题
         mSubTitle = new TextView(getContext());
-        mIcon = new ImageView(getContext());
-        mBubbleNum = new BubbleNum(getContext());
-        addView(mSubTitle);
-        addView(mIcon);
-        addView(mBubbleNum);
-        //设置文本底部居中
-        RelativeLayout.LayoutParams params =
-                new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         mSubTitle.setText(mTitle);
         mSubTitle.setTextColor(Color.GRAY);
         mSubTitle.setGravity(Gravity.CENTER_HORIZONTAL);
-        mSubTitle.setLayoutParams(params);
         mSubTitle.setId(R.id.showTitle);
         mSubTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 11);
-
-        //设置图片在文本上面
-        RelativeLayout.LayoutParams params1 =
-                new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        params1.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        params1.addRule(RelativeLayout.ABOVE, R.id.showTitle);
+        //图标
+        mIcon = new ImageView(getContext());
         mIcon.setImageResource(mUnSelectedRes);
-        mIcon.setLayoutParams(params1);
         mIcon.setId(R.id.showHome);
-
+        //气泡
+        mBubbleNum = new BubbleNum(getContext());
+        mBubbleNum.setId(R.id.showCustom);
+        //添加到本容器
+        addView(mSubTitle);
+        addView(mIcon);
+        addView(mBubbleNum);
+        //位置调整
+        ConstraintSet set = new ConstraintSet();
+        set.clone(this);
+        //设置文本底部居中
+        set.connect(mSubTitle.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM);
+        set.connect(mSubTitle.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
+        set.connect(mSubTitle.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
+        set.connect(mSubTitle.getId(), ConstraintSet.TOP, mIcon.getId(), ConstraintSet.BOTTOM);
+        //设置图片在文本上面
+        set.connect(mIcon.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, (int) (3.5 * mOneDip));
+        set.connect(mIcon.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
+        set.connect(mIcon.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
+        set.connect(mIcon.getId(), ConstraintSet.BOTTOM, mSubTitle.getId(), ConstraintSet.TOP);
         //设置气泡在图片右上角
-        RelativeLayout.LayoutParams params2 =
-                new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        //params2.addRule(RelativeLayout.ABOVE, R.id.showHome);
-        params2.addRule(RelativeLayout.ALIGN_RIGHT, R.id.showHome);
-        params2.rightMargin = (int) (mOneDip * 15);
-        mBubbleNum.setLayoutParams(params2);
+        set.constrainCircle(mBubbleNum.getId(), mIcon.getId(), (int) (mHeightDp * mOneDip / 3), 50f);
+        set.applyTo(this);
     }
 
     //设置消息泡泡数
@@ -118,13 +143,13 @@ public class BottomTab extends RelativeLayout {
 
     //条目被选中
     public void setSelected() {
-        mSubTitle.setTextColor(getResources().getColor(R.color.colorPrimary));
+        mSubTitle.setTextColor(mTextSelectedColor);
         mIcon.setImageResource(mSelectedRes);
     }
 
     //条目取消选中
     public void setUnselected() {
-        mSubTitle.setTextColor(Color.GRAY);
+        mSubTitle.setTextColor(mTextUnSelectedColor);
         mIcon.setImageResource(mUnSelectedRes);
     }
 
@@ -137,4 +162,6 @@ public class BottomTab extends RelativeLayout {
     public void invisibleTitle() {
         mSubTitle.setVisibility(INVISIBLE);
     }
+
+
 }

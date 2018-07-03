@@ -104,12 +104,10 @@ public class BubbleNum extends View {
                 text = "99+";
             }
             canvas.drawRoundRect(new RectF(0, 0, measuredWidth, measuredHeight), r / 2, r / 2, mCirclePaint);
-            canvas.drawText(text, measuredWidth / 2, (mTextHeight + r) / 2 , mTextPaint);
+            canvas.drawText(text, measuredWidth / 2, (mTextHeight + r) / 2, mTextPaint);
         } else {
             //画小圆点
-            DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-            float v = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, displayMetrics);
-            canvas.drawCircle(r / 2, r / 2, v, mCirclePaint);
+            canvas.drawCircle(r / 2, r / 2, mOneDip * 4, mCirclePaint);
         }
     }
 

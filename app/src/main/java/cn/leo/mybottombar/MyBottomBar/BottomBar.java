@@ -34,26 +34,32 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
 
 
     private void init() {
-        //不裁剪子控件,允许突出容器外
-        setClipChildren(false);
-        setClipToPadding(false);
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         mOneDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, displayMetrics);
+        int childCount = getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View childAt = getChildAt(i);
+            if (childAt instanceof BottomTab) {
+                LayoutParams layoutParams = getLayoutParams((BottomTab) childAt);
+                childAt.setLayoutParams(layoutParams);
+            }
+        }
     }
 
     public void addTab(BottomTab tab) {
-        tab.measure(0, 0);
-        int measuredHeight = tab.getMeasuredHeight();
-        LinearLayout.LayoutParams params =
+        //tab.measure(0, 0);
+        LayoutParams params = getLayoutParams(tab);
+        attachViewToParent(tab, -1, params);
+    }
+
+    @NonNull
+    private LayoutParams getLayoutParams(BottomTab tab) {
+        LayoutParams params =
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        if (measuredHeight > mOneDip * 45) { //FIXME
-            params.height = measuredHeight;
-        }
         params.weight = 1;
         params.gravity = Gravity.BOTTOM;
-        tab.setLayoutParams(params);
         tab.setOnClickListener(this);
-        addView(tab);
+        return params;
     }
 
     //点击事件

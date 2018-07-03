@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity implements BottomBar.OnTabSe
                     "测试" + i,
                     R.mipmap.icon_bottom_bar_setting_pressed,
                     R.mipmap.icon_bottom_bar_setting_normal,
-                    40);
+                    45);
             if (i == 2) {
                 bottomTab = new BottomTab(this,
                         "测试" + i,
-                        R.mipmap.icon_invoice,
-                        R.mipmap.icon_invoice,
+                        R.mipmap.icon_bottom_invoice,
+                        R.mipmap.icon_bottom_invoice,
                         60);
                 bottomTab.invisibleTitle();
             }
