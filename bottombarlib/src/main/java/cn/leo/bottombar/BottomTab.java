@@ -42,14 +42,14 @@ public class BottomTab extends ConstraintLayout {
     public BottomTab(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BottomTab);
-        mTitle = a.getString(R.styleable.BottomTab_bottomTab_title_text);
+        mTitle = a.getString(R.styleable.BottomTab_bottomTab_text);
         mSelectedRes = a.getResourceId(R.styleable.BottomTab_bottomTab_icon_selected, 0);
         mUnSelectedRes = a.getResourceId(R.styleable.BottomTab_bottomTab_icon_unselected, 0);
-        mTextSelectedColor = a.getColor(R.styleable.BottomTab_bottomTab_title_selectedColor, Color.BLACK);
-        mTextUnSelectedColor = a.getColor(R.styleable.BottomTab_bottomTab_title_unselectedColor, Color.GRAY);
-        int bubbleStyle = a.getInt(R.styleable.BottomTab_bottomTab_icon_bubbleStyle, 0);
-        int bubbleNum = a.getInt(R.styleable.BottomTab_bottomTab_icon_bubbleNum, 0);
-        int visibility = a.getInt(R.styleable.BottomTab_bottomTab_title_visibility, 0);
+        mTextSelectedColor = a.getColor(R.styleable.BottomTab_bottomTab_text_selectedColor, Color.BLACK);
+        mTextUnSelectedColor = a.getColor(R.styleable.BottomTab_bottomTab_text_unselectedColor, Color.GRAY);
+        int bubbleStyle = a.getInt(R.styleable.BottomTab_bottomTab_bubbleStyle, 0);
+        int bubbleNum = a.getInt(R.styleable.BottomTab_bottomTab_bubbleNum, 0);
+        int visibility = a.getInt(R.styleable.BottomTab_bottomTab_text_visibility, 0);
         a.recycle();
         init();
         if (bubbleStyle > 0) {

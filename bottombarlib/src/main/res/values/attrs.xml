@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="BottomTab">
-        <attr name="bottomTab_title_text" format="string"/>
-        <attr name="bottomTab_title_visibility" format="enum">
+        <attr name="bottomTab_text" format="string"/>
+        <attr name="bottomTab_text_visibility" format="enum">
             <enum name="visible" value="0"/>
             <enum name="invisible" value="1"/>
             <enum name="gone" value="2"/>
         </attr>
-        <attr name="bottomTab_title_selectedColor" format="color|reference"/>
-        <attr name="bottomTab_title_unselectedColor" format="color|reference"/>
+        <attr name="bottomTab_text_selectedColor" format="color|reference"/>
+        <attr name="bottomTab_text_unselectedColor" format="color|reference"/>
         <attr name="bottomTab_icon_unselected" format="reference"/>
         <attr name="bottomTab_icon_selected" format="reference"/>
-        <attr name="bottomTab_icon_bubbleNum" format="integer"/>
-        <attr name="bottomTab_icon_bubbleStyle" format="enum">
+        <attr name="bottomTab_bubbleNum" format="integer"/>
+        <attr name="bottomTab_bubbleStyle" format="enum">
             <enum name="num" value="0"/>
             <enum name="dot" value="1"/>
         </attr>

@@ -29,52 +29,52 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            app:bottomTab_icon_bubbleNum="0"
-            app:bottomTab_icon_bubbleStyle="dot"
+            app:bottomTab_bubbleNum="0"
+            app:bottomTab_bubbleStyle="dot"
             app:bottomTab_icon_selected="@mipmap/icon_bottom_bar_setting_pressed"
             app:bottomTab_icon_unselected="@mipmap/icon_bottom_bar_setting_normal"
-            app:bottomTab_title_text="测试1"/>
+            app:bottomTab_text="测试1"/>
 
         <cn.leo.bottombar.BottomTab
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            app:bottomTab_icon_bubbleNum="0"
-            app:bottomTab_icon_bubbleStyle="dot"
+            app:bottomTab_bubbleNum="0"
+            app:bottomTab_bubbleStyle="dot"
             app:bottomTab_icon_selected="@mipmap/icon_bottom_bar_setting_pressed"
             app:bottomTab_icon_unselected="@mipmap/icon_bottom_bar_setting_normal"
-            app:bottomTab_title_text="测试2"/>
+            app:bottomTab_text="测试2"/>
 
         <cn.leo.bottombar.BottomTab
             android:layout_width="0dp"
             android:layout_height="62dp"
             android:layout_weight="1"
-            app:bottomTab_icon_bubbleNum="0"
-            app:bottomTab_icon_bubbleStyle="dot"
+            app:bottomTab_bubbleNum="0"
+            app:bottomTab_bubbleStyle="dot"
             app:bottomTab_icon_selected="@mipmap/icon_bottom_invoice"
             app:bottomTab_icon_unselected="@mipmap/icon_bottom_invoice"
-            app:bottomTab_title_text="测试3"
-            app:bottomTab_title_visibility="invisible"/>
+            app:bottomTab_text="测试3"
+            app:bottomTab_text_visibility="invisible"/>
 
         <cn.leo.bottombar.BottomTab
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            app:bottomTab_icon_bubbleNum="0"
-            app:bottomTab_icon_bubbleStyle="dot"
+            app:bottomTab_bubbleNum="0"
+            app:bottomTab_bubbleStyle="dot"
             app:bottomTab_icon_selected="@mipmap/icon_bottom_bar_setting_pressed"
             app:bottomTab_icon_unselected="@mipmap/icon_bottom_bar_setting_normal"
-            app:bottomTab_title_text="测试4"/>
+            app:bottomTab_text="测试4"/>
 
         <cn.leo.bottombar.BottomTab
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            app:bottomTab_icon_bubbleNum="12"
-            app:bottomTab_icon_bubbleStyle="num"
+            app:bottomTab_bubbleNum="12"
+            app:bottomTab_bubbleStyle="num"
             app:bottomTab_icon_selected="@mipmap/icon_bottom_bar_setting_pressed"
             app:bottomTab_icon_unselected="@mipmap/icon_bottom_bar_setting_normal"
-            app:bottomTab_title_text="测试5"/>
+            app:bottomTab_text="测试5"/>
     </cn.leo.bottombar.BottomBar>
 
 </RelativeLayout>
