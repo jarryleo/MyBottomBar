@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,12 +17,64 @@
 
     </LinearLayout>
 
-    <cn.leo.mybottombar.MyBottomBar.BottomBar
+    <cn.leo.bottombar.BottomBar
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="67dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/icon_bottom_bg"
-        android:paddingBottom="3dp"/>
+        android:gravity="bottom">
+
+        <cn.leo.bottombar.BottomTab
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            app:bottomTab_icon_bubbleNum="0"
+            app:bottomTab_icon_bubbleStyle="dot"
+            app:bottomTab_icon_selected="@mipmap/icon_bottom_bar_setting_pressed"
+            app:bottomTab_icon_unselected="@mipmap/icon_bottom_bar_setting_normal"
+            app:bottomTab_title_text="测试1"/>
+
+        <cn.leo.bottombar.BottomTab
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            app:bottomTab_icon_bubbleNum="0"
+            app:bottomTab_icon_bubbleStyle="dot"
+            app:bottomTab_icon_selected="@mipmap/icon_bottom_bar_setting_pressed"
+            app:bottomTab_icon_unselected="@mipmap/icon_bottom_bar_setting_normal"
+            app:bottomTab_title_text="测试2"/>
+
+        <cn.leo.bottombar.BottomTab
+            android:layout_width="0dp"
+            android:layout_height="62dp"
+            android:layout_weight="1"
+            app:bottomTab_icon_bubbleNum="0"
+            app:bottomTab_icon_bubbleStyle="dot"
+            app:bottomTab_icon_selected="@mipmap/icon_bottom_invoice"
+            app:bottomTab_icon_unselected="@mipmap/icon_bottom_invoice"
+            app:bottomTab_title_text="测试3"
+            app:bottomTab_title_visibility="invisible"/>
+
+        <cn.leo.bottombar.BottomTab
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            app:bottomTab_icon_bubbleNum="0"
+            app:bottomTab_icon_bubbleStyle="dot"
+            app:bottomTab_icon_selected="@mipmap/icon_bottom_bar_setting_pressed"
+            app:bottomTab_icon_unselected="@mipmap/icon_bottom_bar_setting_normal"
+            app:bottomTab_title_text="测试4"/>
+
+        <cn.leo.bottombar.BottomTab
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            app:bottomTab_icon_bubbleNum="12"
+            app:bottomTab_icon_bubbleStyle="num"
+            app:bottomTab_icon_selected="@mipmap/icon_bottom_bar_setting_pressed"
+            app:bottomTab_icon_unselected="@mipmap/icon_bottom_bar_setting_normal"
+            app:bottomTab_title_text="测试5"/>
+    </cn.leo.bottombar.BottomBar>
 
 </RelativeLayout>

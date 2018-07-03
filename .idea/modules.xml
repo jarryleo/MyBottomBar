@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MyBottomBar.iml" filepath="$PROJECT_DIR$/MyBottomBar.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bottombarlib/bottombarlib.iml" filepath="$PROJECT_DIR$/bottombarlib/bottombarlib.iml" />
     </modules>
   </component>
 </project>

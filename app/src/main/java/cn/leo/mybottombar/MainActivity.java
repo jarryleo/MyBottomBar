@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import cn.leo.mybottombar.MyBottomBar.BottomBar;
-import cn.leo.mybottombar.MyBottomBar.BottomTab;
+import cn.leo.bottombar.BottomBar;
+import cn.leo.bottombar.BottomTab;
 
 public class MainActivity extends AppCompatActivity implements BottomBar.OnTabSelectListener {
 
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements BottomBar.OnTabSe
 
     private void init() {
         mBottomBar = findViewById(R.id.bottom_bar);
-        for (int i = 0; i < 5; i++) {
+        /*for (int i = 0; i < 5; i++) {
             BottomTab bottomTab = new BottomTab(this,
                     "测试" + i,
                     R.mipmap.icon_bottom_bar_setting_pressed,
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements BottomBar.OnTabSe
             }
             bottomTab.setBubbleNum(i + 1);
             mBottomBar.addTab(bottomTab);
-        }
+        }*/
         mBottomBar.setOnTabSelectListener(this);
     }
 

@@ -1,4 +1,4 @@
-package cn.leo.mybottombar.MyBottomBar;
+package cn.leo.bottombar;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 /**
@@ -36,12 +37,17 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
     private void init() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         mOneDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, displayMetrics);
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
-            View childAt = getChildAt(i);
-            if (childAt instanceof BottomTab) {
-                LayoutParams layoutParams = getLayoutParams((BottomTab) childAt);
-                childAt.setLayoutParams(layoutParams);
+            View child = getChildAt(i);
+            if (child instanceof BottomTab) {
+                LayoutParams layoutParams = getLayoutParams((BottomTab) child);
+                child.setLayoutParams(layoutParams);
             }
         }
     }
@@ -54,10 +60,15 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
 
     @NonNull
     private LayoutParams getLayoutParams(BottomTab tab) {
-        LayoutParams params =
-                new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        params.weight = 1;
-        params.gravity = Gravity.BOTTOM;
+        ViewGroup.LayoutParams layoutParams = tab.getLayoutParams();
+        LinearLayout.LayoutParams params;
+        if (layoutParams == null) {
+            params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            params.weight = 1;
+            params.gravity = Gravity.BOTTOM;
+        } else {
+            params = (LayoutParams) layoutParams;
+        }
         tab.setOnClickListener(this);
         return params;
     }

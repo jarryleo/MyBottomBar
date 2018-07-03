@@ -1,4 +1,4 @@
-package cn.leo.mybottombar.MyBottomBar;
+package cn.leo.bottombar;
 
 import android.content.Context;
 import android.graphics.Canvas;

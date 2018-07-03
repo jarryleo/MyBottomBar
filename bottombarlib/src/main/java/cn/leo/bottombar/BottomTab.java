@@ -1,4 +1,4 @@
-package cn.leo.mybottombar.MyBottomBar;
+package cn.leo.bottombar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,10 +10,9 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import cn.leo.mybottombar.R;
 
 /**
  * Created by Leo on 2018/1/29.
@@ -46,11 +45,11 @@ public class BottomTab extends ConstraintLayout {
         mTitle = a.getString(R.styleable.BottomTab_bottomTab_title_text);
         mSelectedRes = a.getResourceId(R.styleable.BottomTab_bottomTab_icon_selected, 0);
         mUnSelectedRes = a.getResourceId(R.styleable.BottomTab_bottomTab_icon_unselected, 0);
-        mTextSelectedColor = a.getColor(R.styleable.BottomTab_bottomTab_title_selectedColor, getResources().getColor(R.color.colorPrimary));
+        mTextSelectedColor = a.getColor(R.styleable.BottomTab_bottomTab_title_selectedColor, Color.BLACK);
         mTextUnSelectedColor = a.getColor(R.styleable.BottomTab_bottomTab_title_unselectedColor, Color.GRAY);
         int bubbleStyle = a.getInt(R.styleable.BottomTab_bottomTab_icon_bubbleStyle, 0);
         int bubbleNum = a.getInt(R.styleable.BottomTab_bottomTab_icon_bubbleNum, 0);
-        boolean isHideTitle = a.getBoolean(R.styleable.BottomTab_bottomTab_title_hide, false);
+        int visibility = a.getInt(R.styleable.BottomTab_bottomTab_title_visibility, 0);
         a.recycle();
         init();
         if (bubbleStyle > 0) {
@@ -59,8 +58,12 @@ public class BottomTab extends ConstraintLayout {
             mBubbleNum.setJustBubble(false);
         }
         setBubbleNum(bubbleNum);
-        if (isHideTitle) {
+        if (visibility == 1) {
+            invisibleTitle();
+        } else if (visibility == 2) {
             hideTitle();
+        } else {
+            mSubTitle.setVisibility(VISIBLE);
         }
     }
 
@@ -83,7 +86,7 @@ public class BottomTab extends ConstraintLayout {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             return;
         }
-        int height = MeasureSpec.makeMeasureSpec((int) (mHeightDp * mOneDip), MeasureSpec.EXACTLY);
+        int height = View.MeasureSpec.makeMeasureSpec((int) (mHeightDp * mOneDip), View.MeasureSpec.EXACTLY);
         super.onMeasure(widthMeasureSpec, height);
     }
 
@@ -95,15 +98,15 @@ public class BottomTab extends ConstraintLayout {
         mSubTitle.setText(mTitle);
         mSubTitle.setTextColor(Color.GRAY);
         mSubTitle.setGravity(Gravity.CENTER_HORIZONTAL);
-        mSubTitle.setId(R.id.showTitle);
+        mSubTitle.setId(R.id.bottom_bar_subtitle);
         mSubTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 11);
         //图标
         mIcon = new ImageView(getContext());
         mIcon.setImageResource(mUnSelectedRes);
-        mIcon.setId(R.id.showHome);
+        mIcon.setId(R.id.bottom_bar_icon);
         //气泡
         mBubbleNum = new BubbleNum(getContext());
-        mBubbleNum.setId(R.id.showCustom);
+        mBubbleNum.setId(R.id.bottom_bar_bubble);
         //添加到本容器
         addView(mSubTitle);
         addView(mIcon);
@@ -122,7 +125,7 @@ public class BottomTab extends ConstraintLayout {
         set.connect(mIcon.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
         set.connect(mIcon.getId(), ConstraintSet.BOTTOM, mSubTitle.getId(), ConstraintSet.TOP);
         //设置气泡在图片右上角
-        set.constrainCircle(mBubbleNum.getId(), mIcon.getId(), (int) (mHeightDp * mOneDip / 3), 50f);
+        set.constrainCircle(mBubbleNum.getId(), mIcon.getId(), (int) (15 * mOneDip ), 50f);
         set.applyTo(this);
     }
 
