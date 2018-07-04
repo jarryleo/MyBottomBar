@@ -51,7 +51,7 @@
             android:layout_weight="1"
             app:bottomTab_bubbleNum="0"
             app:bottomTab_bubbleStyle="dot"
-            app:bottomTab_icon_selected="@mipmap/icon_bottom_invoice"
+            app:bottomTab_icon_selected="@mipmap/ic_launcher"
             app:bottomTab_icon_unselected="@mipmap/icon_bottom_invoice"
             app:bottomTab_text="测试3"
             app:bottomTab_text_visibility="invisible"/>

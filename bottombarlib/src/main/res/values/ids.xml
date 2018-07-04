@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="bottom_bar_subtitle" type="id"/>
+    <item name="bottom_bar_icon" type="id"/>
+    <item name="bottom_bar_bubble" type="id"/>
+</resources>

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +28,6 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
 
     public BottomBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
-    }
-
-
-    private void init() {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        mOneDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, displayMetrics);
     }
 
     @Override
@@ -53,7 +44,6 @@ public class BottomBar extends LinearLayout implements View.OnClickListener {
     }
 
     public void addTab(BottomTab tab) {
-        //tab.measure(0, 0);
         LayoutParams params = getLayoutParams(tab);
         attachViewToParent(tab, -1, params);
     }
